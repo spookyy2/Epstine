@@ -1,0 +1,155 @@
+from http.cookiejar import is_third_party
+
+from operator import is_not
+
+import random
+
+from time import sleep
+
+from math import trunc
+
+import threading
+import time
+
+age = input("How old are you? ")
+name = input("Whats your name? ")
+gender = input("Are you a boy or a girl ")
+
+if age < str(18):
+    print("You wake up on the Epstine Island")
+    time.sleep(1)
+    print("Epstine:Hey " + name + " Welcome to my special island.")
+    time.sleep(2)
+else:
+    print("Epstine only likes em young")
+    exit()
+
+playgame = input("Epstein: Do you want to play a game " + name + "? (yes/no) ")
+
+time.sleep(2)
+
+
+if playgame.lower() == "yes":
+    print("Epstine: Good, Follow me ")
+
+else:
+    print("Epsitne *touches you*")
+
+    time.sleep(5)
+
+    print("You wake up in a celler")
+
+
+    badend1 = input("What do you do ")
+    if badend1.lower() == "Masterbait":
+        print("Why?")
+        exit()
+    else:
+        print("you die alone and un-Fapped")
+    time.sleep(1)
+    print("Bad ending you lose :(")
+    exit()
+
+
+
+print("*walks into massive house*")
+time.sleep(1)
+print("Epstine: We are going to play Hide and seek")
+
+time.sleep(2)
+
+print("Epstine: I will be the Seeker, you will have 60 seconds")
+time.sleep(2)
+
+
+print("Hiding spots")
+time.sleep(1)
+print("bedroom","bathroom")
+time.sleep(1)
+print("celler","kitchen")
+time.sleep(1)
+print("attic","dinning room")
+time.sleep(1)
+
+hiding = input("Where do you Hide? ")
+if hiding.lower() == "bedroom":
+    print("You run up to the bedroom")
+time.sleep(2)
+print("Epstine:Ready or not Here i come little " + gender)
+time.sleep(1)
+whereinbed = input("Where do you hind in the Bedroom? ")
+print("Under the (B)ed","In the (c)loset","Behind the (cu)rtains")
+if whereinbed.lower() == "B":
+    time.sleep(2)
+    print("you go under the bed")
+if whereinbed.lower() == "c":
+    time.sleep(2)
+    print("you go into the closet")
+if whereinbed.lower() == "cu":
+    time.sleep(2)
+    print("you go behind the curtains")
+time,sleep(3)
+
+print("THUMP....THUMP....THUMP")
+print("IM GONNA GET YA LTTLE " + gender)
+time.sleep(4)
+if hiding.lower() == "bedroom":
+    print(" knock ")
+    time.sleep(0.5)
+    print(" knock ")
+    time.sleep(0.5)
+    print(" knock")
+    time.sleep(2)
+print("The door creaks open")
+time.sleep(3)
+print(" he goes up to the bed ")
+if whereinbed.lower() == "b":
+    time.sleep(1)
+    print(" THUD ")
+    time.sleep(1)
+    print("Epstine runs across the room and into the closet")
+    time.sleep(0.1)
+runaway = input("Do you run? (y/n) ")
+if runaway.lower() == "y":
+    print("YOU RUN FOR IT")
+    time.sleep(0.1)
+    print("HE SAW YOU FUCKING LEG IT")
+runawaylr = input("LEFT OR RIGHT QUICK!! (l/r)")
+
+if runawaylr.lower() == "r":
+    print("YOU RUN INTO A KITCHEN")
+    time.sleep(0.1)
+getknife = input("DO YOU GO FOR A KNIFE (y/n) ")
+if getknife.lower() == "y":
+    print("YOU GRABBED A KNIFE")
+    time.sleep(0.4)
+    print("Hes behind you")
+    time.sleep(0.2)
+gokill = input("GO FOR IT? (y/y)")
+
+if gokill.lower() == "y":
+    print("you slash his throught")
+    time.sleep(2)
+    print("  he bleeds out  ")
+    time.sleep(5)
+    print("YOU WIN.Best ending"," Ending: Murder in the mansion")
+
+
+
+
+
+
+
+if whereinbed.lower() == "c":
+    print("a shirt falls")
+    time.sleep(0.2)
+    print("He runs up to the closet")
+    time.sleep(2)
+    if random.choice([True, False]):
+        print("He Grabs you")
+        is_hidden = False
+    else:
+        print(" he didnt get you ")
+        is_hidden = True
+
+
