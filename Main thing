@@ -1,19 +1,503 @@
-from http.cookiejar import is_third_party
+def hide_and_seek():
+    print("*walks into massive house*")
+    time.sleep(1)
+    print("Epstine: We are going to play Hide and seek")
 
-from operator import is_not
+    time.sleep(2)
 
-import random
+    print("Epstine: I will be the Seeker, you will have 60 seconds")
+    time.sleep(2)
 
-from time import sleep
 
-from math import trunc
+    print("Hiding spots")
+    time.sleep(1)
+    print("bedroom","bathroom")
+    time.sleep(1)
+    print("celler","kitchen")
+    time.sleep(1)
+    print("attic","dinning room")
+    time.sleep(1)
 
-import threading
-import time
+    hiding = input("Where do you Hide? ")
+
+    if hiding.upper() == "bedroom":
+        bedroom()
+    if hiding.lower() == "bathroom":
+        print("you go into the bathroom")
+        bathroom()
+
+
+
+
+
+#####BATHROOM/CASINO#####
+def bathroom():
+    time.sleep(2)
+    print("you see a couple things")
+    print("A little Door \n A small cupboard \n A bathtub \n A door with the words ;the jeffery door;")
+    time.sleep(2)
+    bathhiding = input("Where do you go? A,B,C,D")
+
+    if bathhiding.upper() == "A":
+        print("\n You go into a small door in the bathroom")
+        time.sleep(2)
+        print("\n It a massive casino!!!")
+        time.sleep(1)
+        print("\n John Casino: Hello " + name + "Welcome to the Epsino ")
+        time.sleep(2)
+        print("\n John Casino: We have black jack and roulette ")
+        gamechoice = input("Which game do you want to play? BJ or Roulette ")
+
+
+        if gamechoice == "BJ":
+            play_blackjack()
+        elif gamechoice == "Roulette":
+            play_roulette()
+
+def play_blackjack():
+    print("\n you walk over to the BJ table")
+    print("Dealer: lets play some cards ")
+
+    def deal_card():
+        # Face cards are worth 10, Ace can be 11 for now
+        cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
+        return random.choice(cards)
+
+    def calculate_score(hand):
+        score = sum(hand)
+        # If there's an Ace (11) and we're over 21, count it as 1
+        if 11 in hand and score > 21:
+            hand[hand.index(11)] = 1
+            score = sum(hand)
+        return score
+
+    def display_hand(player, hand):
+        print(f"{player}'s hand: {hand}  | Total: {calculate_score(hand)}")
+
+    def play_blackjack():
+        print("\nYou sit down at the Blackjack table...")
+        time.sleep(1)
+
+        player_hand = [deal_card(), deal_card()]
+        dealer_hand = [deal_card(), deal_card()]
+
+        game_over = False
+
+        while not game_over:
+            display_hand("Your", player_hand)
+            print(f"Dealer's visible card: {dealer_hand[0]}")
+
+            if calculate_score(player_hand) == 21:
+                print("Blackjack! 🃏 You win! 48$")
+                money += 48
+                after_rouletter()
+
+
+            choice = input("Do you want to hit or stand? (h/s): ").lower()
+            if choice == "h":
+                player_hand.append(deal_card())
+                if calculate_score(player_hand) > 21:
+                    display_hand("Your", player_hand)
+                    print("Bust! You went over 21. Dealer wins.")
+                    return
+            else:
+                game_over = True
+
+        # Dealer's turn
+        print("\nDealer's turn...")
+        time.sleep(1)
+        while calculate_score(dealer_hand) < 17:
+            dealer_hand.append(deal_card())
+            time.sleep(1)
+
+        display_hand("Dealer", dealer_hand)
+        display_hand("Your", player_hand)
+
+        player_score = calculate_score(player_hand)
+        dealer_score = calculate_score(dealer_hand)
+
+        # Determine winner
+        if dealer_score > 21 or player_score > dealer_score:
+            print("You win a Anti epstine gun")
+            time.sleep(2)
+
+            has_gun = True
+
+
+        elif dealer_score == player_score:
+            print("It's a tie!")
+        else:
+            print("Dealer wins. 😩")
+
+def play_roulette():
+    print("\nYou approach the Roulette table...")
+    time.sleep(1)
+    print("You can bet on a number (0-36), red/black, or even/odd.")
+
+    bet_type = input("Do you bet on a number, color, or parity? (number/color/parity): ").lower()
+
+    if bet_type == "number":
+        bet = input("Pick a number (0-36): ")
+        if not bet.isdigit() or not 0 <= int(bet) <= 36:
+            print("That's not a valid number.")
+            return
+        bet = int(bet)
+
+    elif bet_type == "color":
+        bet = input("Red or Black? (r/b): ").lower()
+        if bet not in ["r", "b"]:
+            print("Invalid color choice.")
+            return
+
+    elif bet_type == "parity":
+        bet = input("Even or Odd? (e/o): ").lower()
+        if bet not in ["e", "o"]:
+            print("Invalid choice.")
+            return
+    else:
+        print("Invalid bet type.")
+        return
+
+    print("\nSpinning the wheel...")
+    time.sleep(2)
+
+    result_number = random.randint(0, 36)
+    result_color = random.choice(["r", "b"]) if result_number != 0 else "g"  # 0 is green
+    result_parity = "e" if result_number % 2 == 0 and result_number != 0 else "o"
+
+    print(
+        f"The ball lands on {result_number} {'Red' if result_color == 'r' else 'Black' if result_color == 'b' else 'Green'}!")
+
+    # Determine win
+    if bet_type == "number" and bet == result_number:
+        print("🎉 You hit the exact number! You win big + 98$")
+        money += 98
+
+    elif bet_type == "color" and bet == result_color:
+        print(" Correct color! You win!")
+        money += 67
+        time.sleep(1)
+        leave_roulette = input("Leave roulete? ")
+
+        if leave_roulette.lower == "yes":
+            after_rouletter()
+
+    elif bet_type == "parity" and bet == result_parity:
+        print(" Even/Odd match! You win!")
+        money += 67
+        time.sleep(1)
+        leave_roulette = input("Leave roulete? ")
+
+        if leave_roulette.lower == "yes":
+            after_rouletter()
+
+    else:
+        print(" You lose this time. Better luck next spin!")
+        time.sleep(2)
+        print("John Casino: sorry you lost you die now :(")
+        time.sleep(0.9)
+        print("\n whips out glock \n shoots you")
+        print("you died")
+        exit()
+
+def after_rouletter():
+    gotoatm = input("\nJohn Casino: Would you like to go to an ATM? (y/n): ")
+
+    while True:
+        if gotoatm == "y":
+            atm()
+            break
+
+        elif gotoatm == "n":
+            print("\nWould you like to buy something?")
+            gotostore = input("\n(y/n): ")
+
+            if gotostore.upper() == "y":
+                store()
+                break
+            elif gotostore.upper() == "n":
+                return
+
+def atm():
+
+    print("\n You go over to the atm")
+    time.sleep(0.5)
+
+    while True:
+
+        what_atm_do: str = input("What do you do \n Check Balance(A) \n Tip(B) \n Leave ATM(C)")
+        if what_atm_do.upper() == "A":
+            print("\n" + str(money) + "\n")
+            time.sleep(3)
+            return
+
+        elif what_atm_do.upper() == "B":
+            time.sleep(1)
+            print("If your even in a celler and gonna die might as well beat it huh?")
+            return
+
+        elif what_atm_do.upper() == "C":
+            print("You leave")
+            time.sleep(1)
+            break
+            after_rouletter()
+
+def store():
+    while True:
+        print("\nyou walk to the store\n")
+        time.sleep(2)
+        print("John Store: Hi Welcome to Store, How may i help you")
+        what_to_do_store = input("You can\n Buy a boat(A)\n Buy a helicopter(B)\n or Buy a really cool yoyo(C) ")
+
+        if what_to_do_store.upper() == "A":
+            print("\n John Store: Ahh a boat good choice\n That will be 100$")
+            if money == 50:
+                time.sleep(2)
+                print("Ahh Perfect amount here you go")
+                has_boat = True
+                time.sleep(1)
+                print("You have Obtained \n Boat \n")
+                time.sleep(2)
+                print("Would you like me to take you to the dock?")
+                gotodock = input("(y/n)")
+                if gotodock.upper() == "y":
+                    dock()
+            elif money <= 50:
+                print("Brokie")
+                return
+
+            elif money >= 50:
+                time.sleep(2)
+                print("Ahh Perfect amount here you go")
+                has_boat = True
+                time.sleep(1)
+                print("You have Obtained \n Boat \n")
+                time.sleep(2)
+                print("Would you like me to take you to the dock?")
+                gotodock = input("(y/n)")
+                if gotodock.upper() == "y":
+                    dock()
+
+            else:
+                print("Sorry bud your to broke")
+        elif what_to_do_store.upper() == "B":
+            time.sleep(2)
+            print("\nJohn Store: Hellicopter huh? good choice")
+            if money == 100:
+                time.sleep(1)
+                print("\nYou have purchesed a Hellicopter\n")
+                print("\nYour Chopper is at the Heli pad\n")
+                have_hellicopter = True
+                gotoheli = input("John Store: would you like me to take you to it? (y/n) ")
+                if gotoheli.upper() == "y":
+                    helipad()
+            elif money >= 100:
+                if money == 100:
+                    time.sleep(1)
+                    print("\nYou have purchesed a Hellicopter\n")
+                    print("\nYour Chopper is at the Heli pad\n")
+                    have_hellicopter = True
+                    gotoheli = input("John Store: would you like me to take you to it? (y/n) ")
+                    if gotoheli.upper() == "y":
+                        helipad()
+            elif money <= 100:
+                print("Brokie")
+                return
+
+        elif what_to_do_store.upper() == "C":
+            print("\nJohn Store: a yoyo? really?")
+            print("\nJohn store: no. ")
+            return
+
+
+
+def dock():
+    print("\n*you hop on your sick ass spead boat\n")
+    time.sleep(2)
+    print("\nYour drive away and get away from the island\n")
+    time.sleep(1)
+    print("\nYou end up in Mali")
+    time.sleep(1)
+    print("this place seems pretty chill")
+    time.sleep(1)
+    print("Ending unlocked:A pretty gay and wild ride Bali. 'say that again' ")
+    time.sleep(1)
+    exit()
+
+
+def helipad():
+    print("You get on a helicopter")
+    time.sleep(2)
+    print("\nHey Im John Helicopter where do you want to go?")
+    time.sleep(2)
+    print("\nhome\n")
+    time.sleep(0.9)
+    print("\nK")
+    time.sleep(3)
+    print("Ending Unlocked:Home again! ")
+    time.sleep(1)
+
+    exit()
+
+
+######BEDROOM####
+def bedroom():
+    if hiding.lower() == "bedroom":
+     print("You run up to the bedroom")
+     time.sleep(2)
+     print("Epstine:Ready or not Here i come little " + gender)
+     time.sleep(1)  #
+     print("Under the (B)ed", "In the (c)loset", "Behind the (cu)rtains")
+     whereinbed = input("Where do you hide in the Bedroom? ")
+    if whereinbed.lower() == "B":
+     time.sleep(2)
+     print("you go under the bed")
+    if whereinbed.lower() == "c":
+      time.sleep(2)
+      print("you go into the closet")
+    if whereinbed.lower() == "cu":
+      time.sleep(2)
+      print("you go behind the curtains")
+      time.sleep(3)
+
+      print("THUMP....THUMP....THUMP")
+      print("IM GONNA GET YA LTTLE " + gender)
+      time.sleep(4)
+
+    if hiding.lower() == "bedroom":
+     print(" knock ")
+     time.sleep(0.5)
+     print(" knock ")
+     time.sleep(0.5)
+     print(" knock")
+     time.sleep(2)
+
+    print("The door creaks open")
+    time.sleep(3)
+    print(" he goes up to the bed ")
+
+    if whereinbed.lower() == "b":
+      time.sleep(1)
+      print(" THUD ")
+      time.sleep(1)
+      print("Epstine runs across the room and into the closet")
+      time.sleep(0.1)
+    if whereinbed.lower() == "c":
+     print("a shirt falls")
+     time.sleep(0.2)
+     print("He runs up to the closet")
+     time.sleep(2)
+     if random.choice([True, False]):
+           print("He Grabs you")
+           is_hidden = False
+     else:
+           print(" he didnt get you ")
+           is_hidden = True
+           time.sleep(3)
+    if whereinbed.lower() == "cu":
+        print("Fucking dumbass he'll see your legs")
+        time.sleep(2)
+
+        print(f"Epstine: I see your legs little {gender} retard")
+        time.sleep(2)
+        print(f"{name}, what if we play Rock paper scissors?")
+        time.sleep(2)
+        print("Epstine: ok")
+
+        while True:
+            user_choice = input("What do you choose? (R for Rock, P for Paper, S for Scissors): ").upper()
+
+            # Validate user input
+            if user_choice not in ["R", "P", "S"]:
+                print("Invalid choice! Please choose R, P, or S.")
+                continue  # Prompt the user again for valid input
+
+            choices = {"R": "Rock", "P": "Paper", "S": "Scissors"}
+            user_choice_full = choices[user_choice]
+            computer_choice = random.choice(list(choices.values()))
+
+            print(f"You chose {user_choice_full}")
+            time.sleep(1)
+            print(f"Epstine chose {computer_choice}")
+            time.sleep(1)
+
+            if user_choice_full == computer_choice:
+                print("It's a tie!")
+                time.sleep(2)
+                continue  # Prompt the user again for another round
+
+            elif (user_choice_full == "Rock" and computer_choice == "Scissors") or \
+                    (user_choice_full == "Paper" and computer_choice == "Rock") or \
+                    (user_choice_full == "Scissors" and computer_choice == "Paper"):
+                print("You win!")
+                time.sleep(2)
+                print("Epstine: NOOOOOO I can't lose. THAT'S IT I'M GONNA RAPE MYSELF")
+                time.sleep(0.5)
+                print("Epstine: *rapes himself*")
+                time.sleep(2)
+                print(f"{name} *rapes Epstine*")
+                time.sleep(2)
+                print(f"Puff daddy: I crown you king of Epstine island {name}")
+                time.sleep(2)
+                print("Ending Unlocked: King of The Island")
+                time.sleep(1)
+                break  # End the game
+
+            else:
+                print(f"Epstine: {computer_choice}")
+                time.sleep(2)
+                print("Epstine: I'm gonna touch you, lil bro")
+                time.sleep(1)
+                print(" touches you ")
+                time.sleep(2)
+                print("Ending unlocked: Rock paper and RAPE?")
+                break  # End the game
+
+    if is_hidden == True:
+      print("You breath a sigh of relief")
+      time.sleep(5)
+      print("Puff daddy:Hey there little boy😈😈 ")
+      time.sleep(0.5)
+      print(name + ":AHHHHHHH PDIDDY")
+      time.sleep(2)
+      print("Puff daddy: you wanna be a muscian😈")
+      time.sleep(1)
+      print("Puff daddy: well i can show you my flute😈😈")
+      time.sleep(2)
+      print("Ending Unlocked: DIDDY PARTY!")
+      exit()
+
+    if whereinbed() == "b":
+        if runaway.lower() == "y":
+            print("YOU RUN FOR IT")
+            time.sleep(0.1)
+            print("HE SAW YOU — FUCKING LEG IT")
+            runawaylr = input("LEFT OR RIGHT QUICK!! (l/r): ")
+
+            if runawaylr.lower() == "r":
+                print("YOU RUN INTO A KITCHEN")
+                time.sleep(0.1)
+                getknife = input("DO YOU GO FOR A KNIFE (y/n): ")
+
+                if getknife.lower() == "y":
+                    print("YOU GRABBED A KNIFE")
+                    time.sleep(0.4)
+                    print("He's behind you")
+                    time.sleep(0.2)
+                    gokill = input("GO FOR IT? (y/y): ")
+
+                    if gokill.lower() == "y":
+                        print("You slash his throat")
+                        time.sleep(2)
+                        print("He bleeds out")
+                        time.sleep(5)
+                        print("YOU WIN. Best ending — Ending: Murder in the Mansion")
+                        exit()
 
 age = input("How old are you? ")
 name = input("Whats your name? ")
 gender = input("Are you a boy or a girl ")
+money = 3 #starting
 
 if age < str(18):
     print("You wake up on the Epstine Island")
@@ -24,13 +508,16 @@ else:
     print("Epstine only likes em young")
     exit()
 
-playgame = input("Epstein: Do you want to play a game " + name + "? (yes/no) ")
+playgame = input("Epstine: Do you want to play a game " + name + "? (yes/no) ")
 
 time.sleep(2)
 
 
 if playgame.lower() == "yes":
     print("Epstine: Good, Follow me ")
+
+if playgame.lower() == "yes":
+    hide_and_seek()
 
 else:
     print("Epsitne *touches you*")
@@ -41,7 +528,7 @@ else:
 
 
     badend1 = input("What do you do ")
-    if badend1.lower() == "Masterbait":
+    if badend1.lower() == "Masterbate":
         print("Why?")
         exit()
     else:
@@ -49,107 +536,4 @@ else:
     time.sleep(1)
     print("Bad ending you lose :(")
     exit()
-
-
-
-print("*walks into massive house*")
-time.sleep(1)
-print("Epstine: We are going to play Hide and seek")
-
-time.sleep(2)
-
-print("Epstine: I will be the Seeker, you will have 60 seconds")
-time.sleep(2)
-
-
-print("Hiding spots")
-time.sleep(1)
-print("bedroom","bathroom")
-time.sleep(1)
-print("celler","kitchen")
-time.sleep(1)
-print("attic","dinning room")
-time.sleep(1)
-
-hiding = input("Where do you Hide? ")
-if hiding.lower() == "bedroom":
-    print("You run up to the bedroom")
-time.sleep(2)
-print("Epstine:Ready or not Here i come little " + gender)
-time.sleep(1)
-whereinbed = input("Where do you hind in the Bedroom? ")
-print("Under the (B)ed","In the (c)loset","Behind the (cu)rtains")
-if whereinbed.lower() == "B":
-    time.sleep(2)
-    print("you go under the bed")
-if whereinbed.lower() == "c":
-    time.sleep(2)
-    print("you go into the closet")
-if whereinbed.lower() == "cu":
-    time.sleep(2)
-    print("you go behind the curtains")
-time,sleep(3)
-
-print("THUMP....THUMP....THUMP")
-print("IM GONNA GET YA LTTLE " + gender)
-time.sleep(4)
-if hiding.lower() == "bedroom":
-    print(" knock ")
-    time.sleep(0.5)
-    print(" knock ")
-    time.sleep(0.5)
-    print(" knock")
-    time.sleep(2)
-print("The door creaks open")
-time.sleep(3)
-print(" he goes up to the bed ")
-if whereinbed.lower() == "b":
-    time.sleep(1)
-    print(" THUD ")
-    time.sleep(1)
-    print("Epstine runs across the room and into the closet")
-    time.sleep(0.1)
-runaway = input("Do you run? (y/n) ")
-if runaway.lower() == "y":
-    print("YOU RUN FOR IT")
-    time.sleep(0.1)
-    print("HE SAW YOU FUCKING LEG IT")
-runawaylr = input("LEFT OR RIGHT QUICK!! (l/r)")
-
-if runawaylr.lower() == "r":
-    print("YOU RUN INTO A KITCHEN")
-    time.sleep(0.1)
-getknife = input("DO YOU GO FOR A KNIFE (y/n) ")
-if getknife.lower() == "y":
-    print("YOU GRABBED A KNIFE")
-    time.sleep(0.4)
-    print("Hes behind you")
-    time.sleep(0.2)
-gokill = input("GO FOR IT? (y/y)")
-
-if gokill.lower() == "y":
-    print("you slash his throught")
-    time.sleep(2)
-    print("  he bleeds out  ")
-    time.sleep(5)
-    print("YOU WIN.Best ending"," Ending: Murder in the mansion")
-
-
-
-
-
-
-
-if whereinbed.lower() == "c":
-    print("a shirt falls")
-    time.sleep(0.2)
-    print("He runs up to the closet")
-    time.sleep(2)
-    if random.choice([True, False]):
-        print("He Grabs you")
-        is_hidden = False
-    else:
-        print(" he didnt get you ")
-        is_hidden = True
-
 
