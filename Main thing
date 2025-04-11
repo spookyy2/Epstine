@@ -24,7 +24,7 @@ def hide_and_seek():
 
     hiding = input("Where do you Hide? ")
 
-    if hiding.upper() == "bedroom":
+    if hiding.lower() == "bedroom":
         bedroom()
     if hiding.lower() == "bathroom":
         print("you go into the bathroom")
@@ -502,6 +502,9 @@ age = input("How old are you? ")
 name = input("Whats your name? ")
 gender = input("Are you a boy or a girl ")
 money = 3 #starting
+
+if name.lower() == "roulette"
+    play_roulette()
 
 if age < str(18):
     print("You wake up on the Epstine Island")
