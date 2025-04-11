@@ -1,3 +1,7 @@
+import time
+import random
+
+
 def hide_and_seek():
     print("*walks into massive house*")
     time.sleep(1)
